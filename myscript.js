@@ -120,6 +120,7 @@ function darkTheme(){
   document.getElementById('sideMenuModuleLink').style.color = "#919fa0";
   document.getElementById('hamOpen').style.color = "#e0d6be";
 
+  document.getElementById('weatherID').style.color = "#e0d6be";
 }
 
 
@@ -185,6 +186,8 @@ function lightTheme(){
     document.getElementById('sideMenuModuleLink').style.background = "#a00c27";
     document.getElementById('sideMenuModuleLink').style.color = "#e5e5e5";
     document.getElementById('hamOpen').style.color = "#000";
+
+    document.getElementById('weatherID').style.color = "#000";
 
 }
 
@@ -462,10 +465,14 @@ function timeResetState(){
     //location.innerHTML = 'Latitude is ' + latitude + '° <br> Longitude is ' + longitude + '°';
 
      $.getJSON(url + apiKey + "/" + latitude + "," + longitude + "?callback=?", function(data) {
-      $('#temp').html(fToc(data.currently.temperature) + '° C');
-      $('#minutely').html(data.minutely.summary);
+      $('#temp').html(fToc(data.currently.temperature) + '<span>° C</span>');
+      $('#minutely').html(weatherIcon(data.hourly.icon));
+      $('#sum').html(data.hourly.summary);
+
     });
   }
+
+
 
   function error() {
     location.innerHTML = "Unable to retrieve your location";
@@ -478,4 +485,47 @@ function timeResetState(){
     temp = temp / 9;
     return parseInt(temp, 10);
   }
+
+  function weatherIcon(temp){
+    if(temp == "clear-day"){
+      var returnIcon = '<i class="fas fa-sun"></i>';
+      return returnIcon;
+    }
+    if(temp == "clear-night"){
+      var returnIcon = '<i class="fas fa-moon"></i>';
+      return returnIcon;
+    }
+    if(temp == "rain"){
+      var returnIcon = '<i class="fas fa-umbrella"></i>';
+      return returnIcon;
+    }
+    if(temp == "snow" || temp == "sleet"){
+      var returnIcon = '<i class="fas fa-snowflake"></i>';
+      return returnIcon;
+    }
+    if(temp == "wind"){
+      var returnIcon = '<<i class="fas fa-wind"></i>';
+      return returnIcon;
+    }
+    if(temp == "fog"){
+      var returnIcon = '<i class="fab fa-mixcloud"></i>';
+      return returnIcon;
+    }
+    if(temp == "cloud"){
+      var returnIcon = '<i class="fas fa-cloud"></i>';
+      return returnIcon;
+    }
+    if(temp == "partly-cloudy-day"){
+      var returnIcon = '<i class="fas fa-cloud-sun"></i>';
+      return returnIcon;
+    }
+    if(temp == "partly-cloudy-night"){
+      var returnIcon = '<i class="fas fa-cloud-moon"></i>';
+      return returnIcon;
+    }
+  }
+
+
+
+
 }
