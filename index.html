@@ -131,19 +131,21 @@
         <a class="link" onclick="ProceedLink(pb)" href="">Pirate Bay</a>
       </div>
     </div>
-    <div class="vpn-check" id="vpn-checkID">
+    <div class="vpn-check" id="vpn-checkID" onclick="getIP()">
         <div id="ip"></div>
         <div class="infoVPN" id="region">No Connection</div>
         <div class="infoVPN" id="country"></div>
         <script>
         getIP();
-        setInterval(getIP, 10000);
+        setInterval(getIP, 600000);
         function getIP(){
           $.get('https://ipinfo.io', function(response){
             $("#ip").html('IP: <b>' +response.ip+'</b>');
             $("#region").html('Region: <b>' +response.region+'</b>');
             $("#country").html('Country: <b>' +response.country+'</b>');
           }, 'jsonp');
+
+          setTimeout(ActiveVPN, 3000);
         }
 
       function getIP2(){

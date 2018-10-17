@@ -6,7 +6,7 @@ var engineOption = localStorage.getItem('EngineOP');
 
   setInterval(clockChange, 1000);
   setInterval(dateChange, 180000);
-  setInterval(ActiveVPN, 10300);
+  //setInterval(ActiveVPN, 10300);
 
   var time;
 
