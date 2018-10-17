@@ -473,6 +473,7 @@ function weather() {
   navigator.geolocation.getCurrentPosition(success, error);
 
   function success(position) {
+    console.log("weatherUpdated");
     //cordoindates of PC
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;

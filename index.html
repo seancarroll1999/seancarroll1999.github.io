@@ -137,15 +137,17 @@
         <div class="infoVPN" id="country"></div>
         <script>
         getIP();
-        setInterval(getIP, 600000);
+        setInterval(getIP, 20000);
         function getIP(){
-          $.get('https://ipinfo.io', function(response){
-            $("#ip").html('IP: <b>' +response.ip+'</b>');
-            $("#region").html('Region: <b>' +response.region+'</b>');
-            $("#country").html('Country: <b>' +response.country+'</b>');
+          $.get('https://extreme-ip-lookup.com/json', function(response){
+            $("#ip").html('IP: <br>' +response.query+'</b>');
+            $("#region").html('Region: <br>' +response.region+'</b>');
+            $("#country").html('Country: <br>' +response.countryCode+'</b>');
           }, 'jsonp');
 
           setTimeout(ActiveVPN, 3000);
+          //https://extreme-ip-lookup.com/ 50 requests a minute
+          //https://ipinfo.io --banned Last attempt
         }
 
       function getIP2(){
@@ -161,7 +163,7 @@
 
 </div>
 
-<div id="weatherID" class="weather">
+<div id="weatherID" class="weather" onclick="weather()">
 <div id="sum"></div><div id="temp"></div><div id="minutely"></div>
 </div>
 
