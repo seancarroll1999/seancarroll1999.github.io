@@ -370,7 +370,7 @@ text-align: center;
 
 .weather{
   display: grid;
-  grid-template-columns: 80% 10% 10%;
+  grid-template-columns: 76% 12% 12%;
   width: 50%;
   text-align: center;
   font-size: 400%;

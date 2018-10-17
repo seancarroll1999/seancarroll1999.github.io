@@ -414,10 +414,13 @@ function openLink(moduleNUM){
   }
 }
 
+
+//TIMEOUT IDLE BLUR AND DARKEN
+
+//adds background blur, darkens page and enables the second clock/date
 function timeOutON() {
 document.getElementById('timeout').style.filter = "brightness(0.0) blur(30px)";
 document.getElementById('timeout').style.transition = "1.4s";
-
 document.getElementById('clock1').style.display = "block";
 document.getElementById('date1').style.display= "block";
 document.getElementById('clock1').style.opacity = "10";
@@ -434,6 +437,7 @@ if(localStorage.getItem('optionDark') == "false"){
 }
 }
 
+//resets the idle stage to normal when user has any input.
 function timeResetState(){
   document.getElementById('timeout').style.filter = "brightness(1) blur(0px)";
   document.getElementById('clock1').style.display = "none";
@@ -448,49 +452,44 @@ function timeResetState(){
 
 }
 
+//will reset the timer and start counting to 30,000 miliseconds (30 seconds)
+function resetTimer() {
+    clearTimeout(time);
+    time = setTimeout(timeOutON, 30000) //calls method to change to idle
+}
 
 
+//WEATHER
 
-    function logout() {
-        timeOutON();
-    }
-
-    function resetTimer() {
-        clearTimeout(time);
-        time = setTimeout(logout, 10000)
-        // 1000 milisec = 1 sec
-    }
-
-    function weather() {
+function weather() {
       //api functions: https://darksky.net/dev/docs
       //general info: https://enlight.nyc/projects/weather#code
 
   var location = document.getElementById("location");
-  var apiKey = 'f536d4c3330c0a1391370d1443cee848'; // PLEASE SIGN UP FOR YOUR OWN API KEY
+  var apiKey = '4b280aea73c6a0f8ecfc3a5be5f29fb9'; // other api key to use: f536d4c3330c0a1391370d1443cee84
   var url = 'https://api.forecast.io/forecast/';
 
+  //gets current position
   navigator.geolocation.getCurrentPosition(success, error);
 
   function success(position) {
+    //cordoindates of PC
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
 
-    //location.innerHTML = 'Latitude is ' + latitude + '° <br> Longitude is ' + longitude + '°';
-
+    //API request on location information
      $.getJSON(url + apiKey + "/" + latitude + "," + longitude + "?callback=?", function(data) {
-      $('#temp').html(fToc(data.currently.temperature) + '<span>° C</span>');
-      $('#minutely').html(weatherIcon(data.hourly.icon));
-      $('#sum').html(data.hourly.summary);
+      $('#temp').html(fToc(data.currently.temperature) + '<span>° C</span>'); //temp converted from F to C
+      $('#minutely').html(weatherIcon(data.hourly.icon)); //Icon String converted to ICON
+      $('#sum').html(data.hourly.summary); //Summary of Days Weather
     });
   }
 
-
-
   function error() {
-    location.innerHTML = "Unable to retrieve your location";
+    location.innerHTML = "Unable to retrieve your location"; //IF theres an error
   }
 
-  //location.innerHTML = "Locating...";
+  //convert Farenheight to Celcius
   function fToc(temp){
     temp = temp - 32;
     temp = temp * 5;
@@ -498,16 +497,51 @@ function timeResetState(){
     return parseInt(temp, 10);
   }
 
+  //Converts Icon String to ICON
   function weatherIcon(temp){
-    if(temp == "clear-day"){
-      var returnIcon = '<i class="fas fa-sun"></i>';
-      console.log("reached");
-      return returnIcon;
+    var timeOfDay = new Date();
+    var hours = timeOfDay.getHours().toString();
+
+    if(hours >= 21 && hours <= 6){ //Night Time (API not good at picking if its day or night)
+      if(temp == "clear-day"){
+        var returnIcon = '<i class="fas fa-moon"></i>';
+        console.log("reached");
+        return returnIcon;
+      }
+      if(temp == "clear-night"){
+        var returnIcon = '<i class="fas fa-moon"></i>';
+        return returnIcon;
+      }
+      if(temp == "partly-cloudy-day"){
+        var returnIcon = '<i class="fas fa-cloud-moon"></i>';
+        return returnIcon;
+      }
+      if(temp == "partly-cloudy-night"){
+        var returnIcon = '<i class="fas fa-cloud-moon"></i>';
+        return returnIcon;
+      }
     }
-    if(temp == "clear-night"){
-      var returnIcon = '<i class="fas fa-moon"></i>';
-      return returnIcon;
+
+    if(hours <21 && hours > 6 ){ //Day Time
+      if(temp == "clear-day"){
+        var returnIcon = '<i class="fas fa-sun"></i>';
+        console.log("reached");
+        return returnIcon;
+      }
+      if(temp == "clear-night"){
+        var returnIcon = '<i class="fas fa-sun"></i>';
+        return returnIcon;
+      }
+      if(temp == "partly-cloudy-day"){
+        var returnIcon = '<i class="fas fa-cloud-sun"></i>';
+        return returnIcon;
+      }
+      if(temp == "partly-cloudy-night"){
+        var returnIcon = '<i class="fas fa-cloud-sun"></i>';
+        return returnIcon;
+      }
     }
+
     if(temp == "rain"){
       var returnIcon = '<i class="fas fa-umbrella"></i>';
       return returnIcon;
@@ -528,17 +562,5 @@ function timeResetState(){
       var returnIcon = '<i class="fas fa-cloud"></i>';
       return returnIcon;
     }
-    if(temp == "partly-cloudy-day"){
-      var returnIcon = '<i class="fas fa-cloud-sun"></i>';
-      return returnIcon;
-    }
-    if(temp == "partly-cloudy-night"){
-      var returnIcon = '<i class="fas fa-cloud-moon"></i>';
-      return returnIcon;
-    }
   }
-
-
-
-
 }
