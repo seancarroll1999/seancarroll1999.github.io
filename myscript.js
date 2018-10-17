@@ -161,7 +161,7 @@ function lightTheme(){
   var arrayOFLinks = document.getElementsByClassName('link');
   for(var i = 0; i<arrayOFLinks.length; i++){
     document.getElementsByClassName('link')[i].style.boxShadow = "5px 10px 18px #888888";
-    document.getElementsByClassName('link')[i].style.border = "2px solid #888";
+    document.getElementsByClassName('link')[i].style.border = "1px solid #888";
     document.getElementsByClassName('link')[i].style.color = "#000";
   }
 
@@ -427,6 +427,11 @@ document.getElementById('date1').style.transition = "1.4s";
 
 clockChange("clock1");
 dateChange("date1");
+
+if(localStorage.getItem('optionDark') == "false"){
+  document.getElementById('date1').style.color= "#b21531";
+  document.getElementById('clock1').style.color = "#b21531";
+}
 }
 
 function timeResetState(){
@@ -436,6 +441,11 @@ function timeResetState(){
   document.getElementById('clock1').style.opacity = "0";
   document.getElementById('date1').style.opacity= "0";
   resetTimer();
+  if(localStorage.getItem('optionDark') == "true"){
+    document.getElementById('date1').style.color= "#e5e5e5";
+    document.getElementById('clock1').style.color = "#e5e5e5";
+  }
+
 }
 
 
@@ -452,6 +462,9 @@ function timeResetState(){
     }
 
     function weather() {
+      //api functions: https://darksky.net/dev/docs
+      //general info: https://enlight.nyc/projects/weather#code
+
   var location = document.getElementById("location");
   var apiKey = 'f536d4c3330c0a1391370d1443cee848'; // PLEASE SIGN UP FOR YOUR OWN API KEY
   var url = 'https://api.forecast.io/forecast/';
@@ -468,7 +481,6 @@ function timeResetState(){
       $('#temp').html(fToc(data.currently.temperature) + '<span>° C</span>');
       $('#minutely').html(weatherIcon(data.hourly.icon));
       $('#sum').html(data.hourly.summary);
-
     });
   }
 
@@ -489,6 +501,7 @@ function timeResetState(){
   function weatherIcon(temp){
     if(temp == "clear-day"){
       var returnIcon = '<i class="fas fa-sun"></i>';
+      console.log("reached");
       return returnIcon;
     }
     if(temp == "clear-night"){
@@ -511,7 +524,7 @@ function timeResetState(){
       var returnIcon = '<i class="fab fa-mixcloud"></i>';
       return returnIcon;
     }
-    if(temp == "cloud"){
+    if(temp == "cloudy"){
       var returnIcon = '<i class="fas fa-cloud"></i>';
       return returnIcon;
     }
