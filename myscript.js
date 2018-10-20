@@ -15,6 +15,12 @@ var engineOption = localStorage.getItem('EngineOP');
   document.onmousemove = timeResetState;
   document.onkeypress = timeResetState;
 
+var count = 0;
+
+function test(){
+  count++;
+  console.log(count);
+}
 
 window.onload = function () {
 clockChange();
@@ -326,25 +332,36 @@ function solarMovies(){
   var formval = document.getElementById('GoogleSearch')  || null;
   var seEngine = document.getElementById("searchOption");
 
-
   if(seEngine.value == 2){
     var textInput = document.getElementById('sBar').value;
-    var finalText = "";
-    var num = textInput.length;
-    for(var i = 0; i<num; i++){
-      var c = textInput.substring(0, 1);
-      if(c == ' '){
-        finalText = finalText + '+';
-      }
-      else{
-        finalText = finalText + c;
-      }
-      textInput = textInput.substr(1);
-    }
+    var finalText = noSpaces(textInput);
     finalText = 'https://solarmoviez.ru/search/' + finalText + '.html';
     window.open(finalText, '_blank');
   }
+  if(seEngine.value == 3){ //not being used but can be added for youtube search
+    var textInput = document.getElementById('sBar').value;
+    var finalText = noSpaces(textInput);
+    finalText = 'https://www.youtube.com/results?search_query=' + finalText;
+    window.open(finalText, '_blank');
+  }
 }
+
+function noSpaces(search){
+  var finalText = "";
+  var num = search.length;
+  for(var i = 0; i<num; i++){
+    var c = search.substring(0, 1);
+    if(c == ' '){
+      finalText = finalText + '+';
+    }
+    else{
+      finalText = finalText + c;
+    }
+    search = search.substr(1);
+  }
+  return finalText;
+}
+
 
 function sideMenuOpen(){
   document.getElementById("hamOpen").style.display = "none";
@@ -458,7 +475,6 @@ function resetTimer() {
     time = setTimeout(timeOutON, 30000) //calls method to change to idle
 }
 
-
 //WEATHER
 
 function weather() {
@@ -482,6 +498,7 @@ function weather() {
      $.getJSON(url + apiKey + "/" + latitude + "," + longitude + "?callback=?", function(data) {
       $('#temp').html(fToc(data.currently.temperature) + '<span>° C</span>'); //temp converted from F to C
       $('#minutely').html(weatherIcon(data.hourly.icon)); //Icon String converted to ICON
+      console.log(data.hourly.icon);
       $('#sum').html(data.hourly.summary); //Summary of Days Weather
     });
   }
@@ -506,7 +523,6 @@ function weather() {
     if(hours >= 21 && hours <= 6){ //Night Time (API not good at picking if its day or night)
       if(temp == "clear-day"){
         var returnIcon = '<i class="fas fa-moon"></i>';
-        console.log("reached");
         return returnIcon;
       }
       if(temp == "clear-night"){
