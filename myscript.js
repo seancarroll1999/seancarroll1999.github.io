@@ -519,9 +519,8 @@ function weather() {
   function weatherIcon(temp){
     var timeOfDay = new Date();
     var hours = timeOfDay.getHours().toString();
-    console.log(timeOfDay.getHours().toString());
 
-    if(hours >= 21 || hours <= 6){ //Night Time (API not good at picking if its day or night)
+    if(hours >= 21 && hours <= 6){ //Night Time (API not good at picking if its day or night)
       if(temp == "clear-day"){
         var returnIcon = '<i class="fas fa-moon"></i>';
         return returnIcon;
@@ -551,7 +550,6 @@ function weather() {
         return returnIcon;
       }
       if(temp == "partly-cloudy-day"){
-
         var returnIcon = '<i class="fas fa-cloud-sun"></i>';
         return returnIcon;
       }

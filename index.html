@@ -80,7 +80,7 @@
 
     <div class="Search">
       <form id="GoogleSearch"  action="https://www.google.co.uk/search" method="GET">
-        <input id="sBar" type="text" name="q">
+        <input id="sBar" type="text" name="q" autofocus>
         <input id="sBTN" type="submit" value="    " onclick="solarMovies()">
       </form>
     </div>
@@ -145,16 +145,17 @@
           }, 'jsonp');
 
           setTimeout(ActiveVPN, 3000);
-        }   //https://extreme-ip-lookup.com/ 50 requests a minute
-          //https://ipinfo.io --banned Last attempt
+        }
 
       function getIP2(){
         $.getJSON('https://json.geoiplookup.io/api?callb...', function(data) {
         console.log(JSON.stringify(data, null, 2));
-});
+        });
       }
         </script>
     </div>
+
+
 
     <h6>_</h6>
 
@@ -168,6 +169,7 @@
 <div id="sum1"></div><div id="temp1"></div><div id="minutely1"></div>
 </div>
 
-
+//https://extreme-ip-lookup.com/ 50 requests a minute
+  //https://ipinfo.io --banned Last attempt
   </body>
 </html>
