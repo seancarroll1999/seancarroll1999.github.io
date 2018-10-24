@@ -520,7 +520,7 @@ function weather() {
     var timeOfDay = new Date();
     var hours = timeOfDay.getHours().toString();
 
-    if(hours >= 21 && hours <= 6){ //Night Time (API not good at picking if its day or night)
+    if(hours >= 21 || hours <= 6){ //Night Time (API not good at picking if its day or night)
       if(temp == "clear-day"){
         var returnIcon = '<i class="fas fa-moon"></i>';
         return returnIcon;
@@ -530,6 +530,7 @@ function weather() {
         return returnIcon;
       }
       if(temp == "partly-cloudy-day"){
+        console.log("reached");
         var returnIcon = '<i class="fas fa-cloud-moon"></i>';
         return returnIcon;
       }
@@ -542,7 +543,6 @@ function weather() {
     if(hours <21 && hours > 6 ){ //Day Time
       if(temp == "clear-day"){
         var returnIcon = '<i class="fas fa-sun"></i>';
-        console.log("reached");
         return returnIcon;
       }
       if(temp == "clear-night"){
