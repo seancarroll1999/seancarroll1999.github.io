@@ -138,6 +138,7 @@
         getIP();
         setInterval(getIP, 20000);
         function getIP(){
+          console.log("VPN Updated");
           $.get('https://extreme-ip-lookup.com/json', function(response){
             $("#ip").html('IP: <br>' +response.query+'</b>');
             $("#region").html('Region: <br>' +response.region+'</b>');
@@ -152,6 +153,8 @@
         console.log(JSON.stringify(data, null, 2));
         });
       }
+      //https://extreme-ip-lookup.com/ 50 requests a minute
+        //https://ipinfo.io --banned Last attempt
         </script>
     </div>
 
@@ -169,7 +172,5 @@
 <div id="sum1"></div><div id="temp1"></div><div id="minutely1"></div>
 </div>
 
-//https://extreme-ip-lookup.com/ 50 requests a minute
-  //https://ipinfo.io --banned Last attempt
   </body>
 </html>
