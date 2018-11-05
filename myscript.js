@@ -335,7 +335,8 @@ function solarMovies(){
   if(seEngine.value == 2){
     var textInput = document.getElementById('sBar').value;
     var finalText = noSpaces(textInput);
-    finalText = 'https://solarmoviez.ru/search/' + finalText + '.html';
+    //finalText = 'https://solarmoviez.ru/search/' + finalText + '.html';
+    finalText = "https://solarmoviex.to/search?keyword="+finalText;
     window.open(finalText, '_blank');
   }
   if(seEngine.value == 3){ //not being used but can be added for youtube search
@@ -530,7 +531,6 @@ function weather() {
         return returnIcon;
       }
       if(temp == "partly-cloudy-day"){
-        console.log("reached");
         var returnIcon = '<i class="fas fa-cloud-moon"></i>';
         return returnIcon;
       }
@@ -568,7 +568,7 @@ function weather() {
       return returnIcon;
     }
     if(temp == "wind"){
-      var returnIcon = '<<i class="fas fa-wind"></i>';
+      var returnIcon = '<i class="fas fa-wind"></i>';
       return returnIcon;
     }
     if(temp == "fog"){
