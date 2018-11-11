@@ -256,7 +256,13 @@ function dateChange(whichOne){
   var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
   month = months[month];
-  day = days[day -1];
+
+  if(day == 0){
+    day = days[6];
+  }else{
+      day = days[day -1];
+  }
+
   var newDate = day + ' The ' + suffix(datenum) + ' of ' + month + ' ' + year;
 
 
