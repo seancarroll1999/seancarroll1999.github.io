@@ -38,37 +38,62 @@
       <h3 id="sideMenuModuleLink" onclick="openSub()" >Module Links</h3>
       <div class="moduleContent">
         <div class="module" id="module1" onclick="openLink(1)">
-          <h3 class="moduleNames"  >co2001 - User Interfaces and Human Computer Interaction</h3>
+          <h3 class="moduleNames"  >CO2008 - Functional Programming</h3>
           <div class="modulecontentlink">
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/blackboard/execute/modulepage/view?course_id=_13119_1&cmp_tab_id=_59390_1&mode=view">BlackBoard Link</a>
-            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2001/">Module Resources</a>
+            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2008/">Module Resources</a>
             <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/ppto-PanoptoCourseTool-bb_bb60/Content.jsp?course_id=_13119_1&mode=view">Panopto Video</a>
           </div>
         </div>
         <div onclick="openLink(2)" class="module" id="module2">
-          <h3 class="moduleNames" >co2006 - Software Engineering and System Development</h3>
+          <h3 class="moduleNames" >CO2015 - Software Engineering Project</h3>
           <div class="modulecontentlink">
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/blackboard/execute/modulepage/view?course_id=_13121_1&cmp_tab_id=_59392_1&mode=view">BlackBoard Link</a>
-            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2006/">Module Resources</a>
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/ppto-PanoptoCourseTool-bb_bb60/Content.jsp?course_id=_13121_1&mode=view">Panopto Video</a>
-            <a class="moduleLink"  href="https://github.com/uol-inf/CO2006-18-19">Github Repo</a>
+            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/blackboard/execute/launcher?type=Course&id=_13125_1&url=">BlackBoard Link</a>
+            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2015/">Module Resources</a>
+            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/ppto-PanoptoCourseTool-BB5bfe8efc36910/Content.jsp?course_id=_13125_1&mode=view">Panopto Video</a>
           </div>
         </div>
         <div onclick="openLink(3)" class="module" id="module3">
-          <h3 class="moduleNames">co2011 - Automata, Languages and Computation</h3>
+          <h3 class="moduleNames">CO2016 - Multimedia and Computer Graphics</h3>
           <div class="modulecontentlink">
-            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2011/">Module Resources</a>
-            <a class="moduleLink"  href="https://leicester.cloud.panopto.eu/Panopto/Pages/Sessions/List.aspx?embedded=0#folderID=%22bc5d191a-42b7-44cc-b724-a91100b478ae%22">Panopto Video</a>
+                <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/blackboard/execute/launcher?type=Course&id=_13126_1&url=">BlackBoard Link</a>
+            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2016/">Module Resources</a>
+            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/ppto-PanoptoCourseTool-BB5bfe8efc36910/Content.jsp?course_id=_13126_1&mode=view">Panopto Video</a>
           </div>
         </div>
         <div onclick="openLink(4)" class="module" id="module4">
-          <h3 class="moduleNames">co2012 - Software Project Management and Professionalism</h3>
+          <h3 class="moduleNames">CO2017 - Operating Systems, Networks and Distributed Systems</h3>
           <div class="modulecontentlink">
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/blackboard/execute/modulepage/view?course_id=_13124_1&cmp_tab_id=_59395_1&mode=view">BlackBoard Link</a>
-            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2012/">Module Resources</a>
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/ppto-PanoptoCourseTool-bb_bb60/Content.jsp?course_id=_13124_1&mode=view">Panopto Video</a>
-            <a class="moduleLink"  href="https://github.com/UOL-CS">Github Repo</a>
+            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/blackboard/execute/launcher?type=Course&id=_13127_1&url=">BlackBoard Link</a>
+            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2017/">Module Resources</a>
+            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/ppto-PanoptoCourseTool-BB5bfe8efc36910/Content.jsp?course_id=_13127_1&mode=view">Panopto Video</a>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ModuleLinks" id="colorConverter">
+      <h3 id="sideMenuModuleLink1" onclick="openColorConverter()" >Colour Converter</h3>
+      <div class="CCcontent">
+        <div class="rgbWrapper">
+          <div class="bar">
+            <h4>Hex:</h4>
+            <input class="rgbVal" type="text" id="hexName">
+          </div>
+          <h4>--  OR  --</h4>
+          <div class="bar">
+            <h4>Red:</h4>
+            <input class="rgbVal" type="text" id="red">
+          </div>
+          <div class="bar">
+            <h4>Green:</h4>
+            <input class="rgbVal" type="text" id="green">
+          </div>
+          <div class="bar">
+            <h4>Blue:</h4>
+            <input class="rgbVal" type="text" id="blue">
+          </div>
+          <button id="cBTN" onClick="convert()">Convert</button>
+          <div class="box" id="colorBox" onClick="copyColor()"><p id="colorName">g</p></div>
         </div>
       </div>
     </div>
@@ -103,7 +128,7 @@
           <a class="link"  href="https://campus.cs.le.ac.uk/teaching/Resources"> Module Resources</a>
           <a class="link"  href="https://srs.le.ac.uk/sipr/sits.urd/run/siw_portal.url?B36E553E33B84459mqgdNUgZ5ZNaYQVFQdNT90iSt8qVLyCPsDxW9-l0fseiNf6puKec-2Nz4jiPs0rcTLHqk7SIsP3aLN1xysU4NfSk17_iqtdXhTxKYv0UmxA"> My Student Record</a>
           <a class="link"  href="https://app.pluralsight.com/library/"> Plurasight</a>
-          <a class="link"  href="https://github.com/uol-inf/CO2006-18-19"> Development Repo</a>
+          <a class="link"  href="https://outlook.office.com/owa/?realm=leicester.ac.uk"> University E-mail</a>
         </div>
 
       </div>

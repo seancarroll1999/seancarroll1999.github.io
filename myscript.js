@@ -127,6 +127,20 @@ function darkTheme(){
   document.getElementById('hamOpen').style.color = "#e0d6be";
 
   document.getElementById('weatherID').style.color = "#e0d6be";
+
+
+//color converter
+  document.getElementById('sideMenuModuleLink1').style.background = "#152023";
+  document.getElementById('sideMenuModuleLink1').style.color = "#919fa0";
+  document.getElementById('colorConverter').style.background = "#27272d";
+  document.getElementById('cBTN').style.background = "#152023";
+  document.getElementById('cBTN').style.color = "#919fa0";
+
+  var arrayRGB = document.getElementsByClassName('rgbVal');
+  for(var i = 0; i<arrayRGB.length; i++){
+    document.getElementsByClassName('rgbVal')[i].style.backgroundColor = "#334d54";
+  }
+
 }
 
 
@@ -194,6 +208,18 @@ function lightTheme(){
     document.getElementById('hamOpen').style.color = "#000";
 
     document.getElementById('weatherID').style.color = "#000";
+
+    //color converter
+      document.getElementById('sideMenuModuleLink1').style.background = "#a00c27";
+      document.getElementById('sideMenuModuleLink1').style.color = "#e5e5e5";
+      document.getElementById('colorConverter').style.background = "#c4c4c4";
+      document.getElementById('cBTN').style.background = "#b21531";
+      document.getElementById('cBTN').style.color = "#e5e5e5";
+
+      var arrayRGB = document.getElementsByClassName('rgbVal');
+      for(var i = 0; i<arrayRGB.length; i++){
+        document.getElementsByClassName('rgbVal')[i].style.backgroundColor = "#e5e5e5";
+      }
 
 }
 
@@ -385,6 +411,8 @@ var linkcountmod1 = 0;
 var linkcountmod2 = 0;
 var linkcountmod3 = 0;
 var linkcountmod4 = 0;
+
+
 function openSub(){
   subopencount++
 
@@ -586,4 +614,190 @@ function weather() {
       return returnIcon;
     }
   }
+}
+
+//CONVERT COLORS
+
+var colorOpenCount = 0;
+
+function openColorConverter(){
+  colorOpenCount++
+  if(colorOpenCount % 2 == 0){
+    document.getElementsByClassName("CCcontent")[0].style.display = "none";
+  }
+  else{
+    document.getElementsByClassName("CCcontent")[0].style.display = "grid";
+  }
+}
+
+function convert(){
+  var  h = document.getElementById('hexName');
+  var  r = document.getElementById('red');
+  var  g = document.getElementById('green');
+  var  b = document.getElementById('blue');
+  var displayB = document.getElementById('colorBox');
+  var displayN = document.getElementById('colorName');
+
+  var hexCode = h.value;
+  var red = r.value;
+  var green = g.value;
+  var blue = b.value;
+
+
+    if(hexCode != ""){
+    console.log("hexCoversion");
+    if(hexCode.charAt(0) == '#'){
+      hexCode = hexCode.substring(1);
+    }
+
+    if(hexCode.length == 6) {
+
+    		hex1 = hexCode.substring(0,2);
+    		hex2 = hexCode.substring(2,4);
+    		hex3 = hexCode.substring(4,6);
+    		}
+    		if(hexCode.length == 3) {
+    			hex1 = hexCode.substring(0,1);
+    			hex1 = hex1 + hex1;
+    			hex2 = hexCode.substring(1,2);
+    			hex2 = hex2 + hex2;
+    			hex3 = hexCode.substring(2,3);
+    			hex3 = hex3 + hex3;
+    		}
+
+
+    		var redVal = splitNum(hex1);
+        console.log(redVal);
+
+    		var greenVal = splitNum(hex2);
+    		var blueVal = splitNum(hex3);
+
+        console.log(redVal + "," + greenVal + "," + blueVal);
+
+    //    r.value = redVal;
+      //  g.value = greenVal;
+    //    b.value = blueVal;
+      document.getElementById("colorBox").style.display = "block";
+      document.getElementById("colorName").innerHTML = "(" + redVal + "," + greenVal + "," + blueVal + ")";
+      document.getElementById("colorBox").style.backgroundColor = "#" + hexCode;
+      document.getElementById("colorName").style.color = "#" + invertColour(hexCode);
+
+
+  }
+  else{
+    if(red != "" && green != "" && blue != "" && hexCode == ""){
+      console.log("RGB Conversion");
+
+      var r = BinaryConvert(red);
+      var g = BinaryConvert(green);
+      var b = BinaryConvert(blue);
+
+
+        document.getElementById("colorBox").style.display = "block";
+        document.getElementById("colorName").innerHTML = "#" + r + g + b;
+        document.getElementById("colorBox").style.backgroundColor = "#" + r + g + b;
+        document.getElementById("colorName").style.color = "#" + invertColour(r + g + b);
+    }
+  }
+
+}
+
+
+function splitNum(hex){
+    var hex1 = hex.substring(0,1);
+		var hex2 = hex.substring(1,2);
+
+		var val1 = 0;
+		var val2 = 0;
+
+
+    val1 = charToNum(hex1);
+    val2 = charToNum(hex2);
+
+		var val = (val1 * 16) + val2;
+		return val;
+}
+
+function charToNum(c){
+
+  if(c == 'a' || c == 'A') {
+    return 10;
+  }
+  if(c == 'b' || c == 'B') {
+    return 11;
+  }
+  if(c == 'c' || c == 'C') {
+    return 12;
+  }
+  if(c == 'd' || c == 'D') {
+    return 13;
+  }
+  if(c == 'e' || c == 'E') {
+    return 14;
+  }
+  if(c == 'f' || c == 'F') {
+
+    return 15;
+  }
+  if(c == 'd' || c == 'G') {
+    return 16;
+  }
+
+  if(c < 9){
+    c = parseInt(c, 10)
+    return c;
+  }
+  return 0;
+}
+
+function BinaryConvert(num){
+
+  num = parseInt(num, 10)
+  var binary = (num).toString(16);
+  return binary;
+}
+
+function invertColour(hexCode){
+  var returnColor = "";
+
+  var convert1 = "0123456789abcdef";
+  var convert2 = "fedcba9876543210";
+
+  for(var i = 0; i < hexCode.length; i++){
+    var c = hexCode.charAt(i);
+    for(var z = 0; z < convert1.length; z++){
+      if(c == convert1.charAt(z)){
+        returnColor = returnColor + convert2.charAt(z);
+      }
+    }
+
+  }
+  return returnColor;
+}
+
+function copyColor(){
+  var  h = document.getElementById('hexName');
+  var  r = document.getElementById('red');
+  var  g = document.getElementById('green');
+  var  b = document.getElementById('blue');
+
+
+  var text = document.getElementById('colorName').textContent;
+
+    var el = document.createElement('textarea');
+    el.value = text;
+    el.setAttribute('readonly', '');
+    el.style = {position: 'absolute', left: '-9999px'};
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+h.value = "";
+r.value = "";
+g.value = "";
+b.value = "";
+document.getElementById('colorBox').style.display = "none";
+
+
 }
