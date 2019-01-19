@@ -140,7 +140,8 @@ function darkTheme(){
   for(var i = 0; i<arrayRGB.length; i++){
     document.getElementsByClassName('rgbVal')[i].style.backgroundColor = "#334d54";
   }
-
+  document.getElementById('ccBTN').style.background = "#152023";
+  document.getElementById('ccBTN').style.color = "#919fa0";
 }
 
 
@@ -220,7 +221,8 @@ function lightTheme(){
       for(var i = 0; i<arrayRGB.length; i++){
         document.getElementsByClassName('rgbVal')[i].style.backgroundColor = "#e5e5e5";
       }
-
+      document.getElementById('ccBTN').style.background = "#b21531";
+      document.getElementById('ccBTN').style.color = "#e5e5e5";
 }
 
 
@@ -798,6 +800,11 @@ r.value = "";
 g.value = "";
 b.value = "";
 document.getElementById('colorBox').style.display = "none";
+}
 
-
+function clearInput(){
+  document.getElementById('hexName').value = "";
+  document.getElementById('red').value = "";
+  document.getElementById('green').value = "";
+  document.getElementById('blue').value = "";
 }

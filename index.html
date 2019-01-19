@@ -92,7 +92,11 @@
             <h4>Blue:</h4>
             <input class="rgbVal" type="text" id="blue">
           </div>
-          <button id="cBTN" onClick="convert()">Convert</button>
+          <div class="btnWrap">
+            <button id="cBTN" onClick="convert()">Convert</button>
+              <button id="ccBTN" onClick="clearInput()">Clear</button>
+          </div>
+
           <div class="box" id="colorBox" onClick="copyColor()"><p id="colorName">g</p></div>
         </div>
       </div>
