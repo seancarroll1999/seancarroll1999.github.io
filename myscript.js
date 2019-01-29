@@ -481,6 +481,8 @@ document.getElementById('clock1').style.opacity = "10";
 document.getElementById('date1').style.opacity= "10";
 document.getElementById('clock1').style.transition = "1.4s";
 document.getElementById('date1').style.transition = "1.4s";
+document.getElementById('sBar').blur();
+
 
 clockChange("clock1");
 dateChange("date1");
@@ -498,6 +500,8 @@ function timeResetState(){
   document.getElementById('date1').style.display= "none";
   document.getElementById('clock1').style.opacity = "0";
   document.getElementById('date1').style.opacity= "0";
+  document.getElementById('sBar').focus();
+
   resetTimer();
   if(localStorage.getItem('optionDark') == "true"){
     document.getElementById('date1').style.color= "#e5e5e5";
