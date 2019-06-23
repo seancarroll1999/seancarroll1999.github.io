@@ -1,210 +1,135 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="theme-color" content="#db5945">
-    <link rel="stylesheet" href="style.css">
-    <title></title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <style>
-      h1, h2, h3, a, #sliderEngine{
-      font-family: 'Montserrat', sans-serif;
-      }
-    </style>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Start Page</title>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  </head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
+
+  <script src="js/script.js"></script>
+  <link rel="stylesheet" href="css/custom.css">
+  <link id="pageStyle" rel="stylesheet" href="css/dark.css">
+
+  <script src="https://kit.fontawesome.com/fb5abb866a.js"></script>
+</head>
   <body>
-    <div class="TimeDateTop">
-      <h1 id="clock1">00 : 00</h1>
-      <h2 id="date1"> 13th of September</h2>
-    </div>
 
-    <div id="timeout">
+<div class="background">
+  <iframe id="map"
+    frameborder="0" style="border:0"
+    src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBOi_4L-NgEAYOcf309Z93TQrZAG4NXQTY
+      &center=54.296007,-4.069787
+      &zoom=6
+      &maptype=roadmap" allowfullscreen>
+  </iframe>
+</div>
 
-
-      <script type="text/javascript" src="myscript.js"></script>
-    <i id="hamOpen"class="fas fa-align-justify" onclick="sideMenuOpen()"></i>
-    <div class="sideMenu">
-      <div class="sideOptions">
-        <i id="hamClose" class="fas fa-align-left" onclick="sideMenuClose()"></i>
-        <p id="optionNa">Dark Theme: </p> <input type="range" id="darktheme1" name="darkthemerange"min="0" max="1"/>
-      </div>
-    <div class="ModuleLinks">
-      <h3 id="sideMenuModuleLink" onclick="openSub()" >Module Links</h3>
-      <div class="moduleContent">
-        <div class="module" id="module1" onclick="openLink(1)">
-          <h3 class="moduleNames"  >CO2008 - Functional Programming</h3>
-          <div class="modulecontentlink">
-            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2008/">Module Resources</a>
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/ppto-PanoptoCourseTool-bb_bb60/Content.jsp?course_id=_13119_1&mode=view">Panopto Video</a>
-          </div>
-        </div>
-        <div onclick="openLink(2)" class="module" id="module2">
-          <h3 class="moduleNames" >CO2015 - Software Engineering Project</h3>
-          <div class="modulecontentlink">
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/blackboard/execute/launcher?type=Course&id=_13125_1&url=">BlackBoard Link</a>
-            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2015/">Module Resources</a>
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/ppto-PanoptoCourseTool-BB5bfe8efc36910/Content.jsp?course_id=_13125_1&mode=view">Panopto Video</a>
-          </div>
-        </div>
-        <div onclick="openLink(3)" class="module" id="module3">
-          <h3 class="moduleNames">CO2016 - Multimedia and Computer Graphics</h3>
-          <div class="modulecontentlink">
-                <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/blackboard/execute/launcher?type=Course&id=_13126_1&url=">BlackBoard Link</a>
-            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2016/">Module Resources</a>
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/ppto-PanoptoCourseTool-BB5bfe8efc36910/Content.jsp?course_id=_13126_1&mode=view">Panopto Video</a>
-          </div>
-        </div>
-        <div onclick="openLink(4)" class="module" id="module4">
-          <h3 class="moduleNames">CO2017 - Operating Systems, Networks and Distributed Systems</h3>
-          <div class="modulecontentlink">
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/blackboard/execute/launcher?type=Course&id=_13127_1&url=">BlackBoard Link</a>
-            <a class="moduleLink"  href="https://campus.cs.le.ac.uk/teaching/resources/CO2017/">Module Resources</a>
-            <a class="moduleLink"  href="https://blackboard.le.ac.uk/webapps/ppto-PanoptoCourseTool-BB5bfe8efc36910/Content.jsp?course_id=_13127_1&mode=view">Panopto Video</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="ModuleLinks" id="colorConverter">
-      <h3 id="sideMenuModuleLink1" onclick="openColorConverter()" >Colour Converter</h3>
-      <div class="CCcontent">
-        <div class="rgbWrapper">
-          <div class="bar">
-            <h4>Hex:</h4>
-            <input class="rgbVal" autocomplete="off" type="text" id="hexName">
-          </div>
-          <h4>--  OR  --</h4>
-          <div class="bar">
-            <h4>Red:</h4>
-            <input class="rgbVal" autocomplete="off" type="text" id="red">
-          </div>
-          <div class="bar">
-            <h4>Green:</h4>
-            <input class="rgbVal" autocomplete="off" type="text" id="green">
-          </div>
-          <div class="bar">
-            <h4>Blue:</h4>
-            <input class="rgbVal" autocomplete="off" type="text" id="blue">
-          </div>
-          <div class="btnWrap">
-            <button id="cBTN" onClick="convert()">Convert</button>
-              <button id="ccBTN" onClick="clearInput()">Clear</button>
-          </div>
-
-          <div class="box" id="colorBox" onClick="copyColor()"><p id="colorName">g</p></div>
-        </div>
-      </div>
-    </div>
+  <div class="side-menu">
+    <div id="oS" onclick="openSetting()" class="sideBTN"><h1 class="display-2">S</h1></div>
+    <div onclick="openUni()" class="sideBTN"><h1 class="display-2">U</h1></div>
+    <div onclick="openTodo()" class="sideBTN"><h1 class="display-2">T</h1></div>
+    <div onclick="openSetting()" class="sideBTN"><h1 class="display-2">W</h1></div>
+    <div onclick="openSetting()" class="sideBTN"><h1 class="display-2">L</h1></div>
   </div>
 
-    <div class="TimeDate">
-      <h1 id="clock">00 : 00</h1>
-      <h2 id="date"> 13th of September</h2>
-    </div>
+  <div id="time-date">
+    <h1 id="clock" class="display-1 font-weight-bold text-center">20:08</h1>
+    <h3 id="date" class="text-center" >Friday The 20st of June</h3>
+  </div>
 
-    <div class="Search">
-      <form id="GoogleSearch"  action="https://www.google.co.uk/search" method="GET">
-        <input id="sBar" type="text" name="q" autofocus>
-        <input id="sBTN" type="submit" value="    " onclick="solarMovies()">
-      </form>
-    </div>
 
-    <div id="SearchSlider">
-      <datalist id="sliderEngine">
-        <option id="googleSearch" value="0" label="Google"></option>
-        <option id="duckSearch" value="1" label="Duck Duck Go"></option>
-        <option id="tvSearch" value="2" label="Solar Movies"></option>
-      </datalist>
-        <input type="range" id="searchOption" name="searchOptionR"min="0" max="2" step="1" list="sliderEngine"/>
-    </div>
+  <form id="searchContainer" action="https://www.google.co.uk/search" method="get" autocomplete="off">
+    <input id="sBAR" type="text" name="q">
+    <input id="sBTN" type="submit" value="" onclick="otherSearch()">
+  </form>
 
-    <div class="bookmarks" id="bookmarks1">
-      <div class="sub">
-        <div class="sub">
-          <h3 class="title3" id="uni">University</h3>
-          <a class="link"  href="https://blackboard.le.ac.uk/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_62_1">Blackboard</a>
-          <a class="link"  href="https://campus.cs.le.ac.uk/teaching/Resources"> Module Resources</a>
-          <a class="link"  href="https://srs.le.ac.uk/sipr/sits.urd/run/siw_portal.url?B36E553E33B84459mqgdNUgZ5ZNaYQVFQdNT90iSt8qVLyCPsDxW9-l0fseiNf6puKec-2Nz4jiPs0rcTLHqk7SIsP3aLN1xysU4NfSk17_iqtdXhTxKYv0UmxA"> My Student Record</a>
-          <a class="link"  href="https://app.pluralsight.com/library/"> Plurasight</a>
-          <a class="link"  href="https://outlook.office.com/owa/?realm=leicester.ac.uk"> University E-mail</a>
+  <button id="switchSearch" onclick="changeSearch()"><img id="search-Logo" src="img/google-Light.svg"></button>
+
+
+  <div id="box">
+
+    <div class="module" id="uni">
+      <h1 class="text-center">University</h1>
+
+      <div class="uniMod">
+        <h4 class="text-center">co3015 - Computer Science Project</h4>
+        <div class="uniLink">
+          <a href="">Module Link</a>
+          <a href="">Panopto Video</a>
+          <a href="">Blackboard</a>
         </div>
-
-      </div>
-      <div class="sub">
-        <h3 class="title3" id="shop">Shopping</h3>
-          <a class="link"  href="https://www.amazon.co.uk/">Amazon</a>
-          <a class="link"  href="https://www.ebay.co.uk/">Ebay</a>
-          <a class="link"  href="https://www.asos.com/men/">ASOS</a>
-          <a class="link"  href="https://www.newlook.com/uk/mens">New Look</a>
-          <a class="link"  href="https://www2.hm.com/en_gb/men.html">H&M</a>
       </div>
 
-        <script>
-        //variables needed to pass through to ProceedLink function is myscript.js
-            var rar = 'https://rarbgmirror.org/torrents.php?r=31474239';
-            var pb = 'https://thepiratebay.rocks/';
-        </script>
+      <div class="uniMod">
+        <h4 class="text-center">co3091 - Comp Intelligence and Software Dev</h4>
+        <div class="uniLink">
+          <a href="">Module Link</a>
+          <a href="">Panopto Video</a>
+          <a href="">Blackboard</a>
+        </div>
+          <p class="text-center"><strong>Name:</strong> Yu-Dong Zhang | <strong>E-Mail:</strong> yz461@leicester.ac.uk</p>
+          <p class="text-center"><strong>Name:</strong> Reza Zare | <strong>E-Mail:</strong> mrz3@leicester.ac.uk</p>
+      </div>
 
-      <div class="sub">
-        <h3 class="title3" id="vid">Video</h3>
-        <a class="link"  href="https://www.youtube.com/">YouTube</a>
-        <a class="link"  href="https://solarmoviex.to/movies">Movies</a>
-        <a class="link"  href="https://solarmoviex.to/tv-series">Tv Series</a>
-        <a class="link" onclick="ProceedLink(rar)" href="">RARBG</a>
-        <a class="link" onclick="ProceedLink(pb)" href="">Pirate Bay</a>
+      <div class="uniMod">
+        <h4 class="text-center">co3105 - C++</h4>
+        <div class="uniLink">
+          <a href="">Module Link</a>
+          <a href="">Panopto Video</a>
+          <a href="">Blackboard</a>
+        </div>
+          <p class="text-center"><strong>Name:</strong> Rayna Dimitrova | <strong>E-Mail:</strong> rd307@leicester.ac.uk</p>
+          <p class="text-center"><strong>Name:</strong> Yi Hong | <strong>E-Mail:</strong> yh37@mcs.le.ac.uk</p>
+      </div>
+    </div>
+
+    <div class="module" id="settings">
+      <h1 class="text-center">Settings</h1>
+
+      <div class="setting-section">
+        <h3>UI :</h3>
+          <div class="settingItem">
+            <p>Theme: </p>
+            <input id="changeTheme" type="checkbox" data-toggle="toggle" data-size="sm" data-onstyle="light" data-offstyle="dark" data-on="Dark" data-off="Light">
+          </div>
+      </div>
+
+      <div class="setting-section">
+        <h3>Map :</h3>
+          <div class="settingItem">
+            <p>Map Scrolling: </p>
+            <input id="mapClick" type="checkbox" checked data-toggle="toggle" data-size="sm" data-onstyle="light" data-offstyle="dark" data-on="On" data-off="Off">
+          </div>
+          <div class="settingItem">
+            <p>Map IP: </p>
+            <input type="checkbox" checked data-toggle="toggle" data-size="sm" data-onstyle="light" data-offstyle="dark" data-on="Yes" data-off="No">
+          </div>
+        </div>
+    </div>
+
+    <div class="module" id="todo">
+      <h1 class="text-center">Todo</h1>
+      <div id="newTodo">
+        <input id="todo-text" type="text">
+        <button id="todo-btn" type="button" onclick="addTodo()">Add</button>
+      </div>
+      <div id="todos">
       </div>
     </div>
 
 
+  </div>
 
-
-    <div class="vpn-check" id="vpn-checkID" onclick="getIP()">
-        <div id="ip"></div>
-        <div class="infoVPN" id="region">No Connection</div>
-        <div class="infoVPN" id="country"></div>
-        <script>
-        getIP();
-        setInterval(getIP, 20000);
-        function getIP(){
-          console.log("VPN Updated");
-          $.get('https://extreme-ip-lookup.com/json', function(response){
-            $("#ip").html('IP: <br>' +response.query+'</b>');
-            $("#region").html('Region: <br>' +response.region+'</b>');
-            $("#country").html('Country: <br>' +response.countryCode+'</b>');
-          }, 'jsonp');
-
-          setTimeout(ActiveVPN, 3000);
-        }
-
-      function getIP2(){
-        $.getJSON('https://json.geoiplookup.io/api?callb...', function(data) {
-        console.log(JSON.stringify(data, null, 2));
-        });
-      }
-      //https://extreme-ip-lookup.com/ 50 requests a minute
-        //https://ipinfo.io --banned Last attempt
-        </script>
-    </div>
-
-
-
-    <h6>_</h6>
-
-</div>
-
-<div id="weatherID" class="weather" onclick="weather()">
-<div id="sum"></div><div id="temp"></div><div id="minutely"></div>
-</div>
-
-<div id="5dayWeather" class="5weather">
-<div id="sum1"></div><div id="temp1"></div><div id="minutely1"></div>
-</div>
-
+  </div>
   </body>
+
+
 </html>
