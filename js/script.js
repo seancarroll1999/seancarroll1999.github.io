@@ -3,6 +3,7 @@ var textInputs = [];
 var searchEngine = localStorage.getItem('searchEngine'); //change to localstorage
 
 window.onload = function() {
+  makeLocalStorage();
   clockChange();
   dateChange();
 
@@ -22,11 +23,19 @@ window.onload = function() {
 
   applySearch();
   changeLogo();
-
-  resetTimer();
 }
 
-
+function makeLocalStorage(){
+  if(localStorage.getItem('searchEngine') == null){
+    localStorage.setItem('searchEngine', 1);
+  }
+  if(localStorage.getItem('todos') == null){
+    localStorage.setItem('todos', '');
+  }
+  if(localStorage.getItem('darkTheme') == null){
+    localStorage.setItem('darkTheme', true);
+  }
+}
 
 //runs the functions on every amount of milliseconds
 setInterval(clockChange, 1000);
@@ -127,8 +136,6 @@ function otherSearch(){
   }
 
 }
-
-
 
 function noSpaces(search){
   var finalText = "";
