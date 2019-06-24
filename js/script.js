@@ -236,6 +236,9 @@ function closeBox(){
 window.addEventListener("keydown", checkKeyPress, false); //ENABLE FOR BOX TO APPEAR
 
 function checkKeyPress(key){
+  if(key.keyCode == "27"){ //ESC
+    closeBox();
+  }
   if(textInputs.includes(document.activeElement) !== true){
     if(key.keyCode == "83"){ // S
       openSetting();
@@ -245,9 +248,6 @@ function checkKeyPress(key){
     }
     if(key.keyCode == "84"){ //T
       openTodo();
-    }
-    if(key.keyCode == "27"){ //ESC
-      closeBox();
     }
   }
 }
