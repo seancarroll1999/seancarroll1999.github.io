@@ -116,28 +116,25 @@ function changeSearch(){
 function applySearch(){
   var engine = document.getElementById('searchContainer');
   var btn = document.getElementById('sBTN');
-
-  engine.addEventListener("submit", function(event){
-    event.preventDefault()
-  });
-
   if(searchEngine == 1){
       engine.action = "https://www.google.co.uk/search";
+      btn.setAttribute('type', 'submit');
   }else if(searchEngine == 2){
     engine.action = "https://duckduckgo.com/";
+    btn.setAttribute('type', 'submit');
+  }else{
+    btn.setAttribute('type', 'button');
   }
 }
 
 
 function otherSearch(){
-  var form = document.getElementById('searchContainer');
-  if(searchEngine == 1 || searchEngine == 2){
-    form.submit();
-  }else if(searchEngine == 3){
-    console.log('reached otherSearch');
+  if(searchEngine == 3){
+    console.log('reached');
     var txt = 'https://solarmoviex.to/search?keyword=' + noSpaces(document.getElementById('sBAR').value);
     location.replace(txt);
   }
+
 }
 
 function noSpaces(search){
@@ -242,20 +239,6 @@ function checkKeyPress(key){
   if(key.keyCode == "27"){ //ESC
     closeBox();
   }
-
-  if(key.keyCode == "13" && textInputs.includes(document.activeElement)){
-    if(document.activeElement == document.getElementById('todo-text')){
-      addTodo();
-    }else if(document.activeElement == document.getElementById('sBAR')){
-      if(searchEngine == 1 || searchEngine == 2){
-        document.getElementById('searchContainer').submit();
-      }else{
-        console.log("happened");
-        otherSearch();
-      }
-    }
-  }
-
   if(textInputs.includes(document.activeElement) !== true){
     if(key.keyCode == "83"){ // S
       openSetting();
