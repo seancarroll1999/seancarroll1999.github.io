@@ -24,7 +24,6 @@ window.onload = function() {
 
   applySearch();
   changeLogo();
-
 }
 
 
@@ -160,6 +159,10 @@ function applySearch(){
   }else{
     btn.setAttribute('type', 'button');
   }
+
+  engine.addEventListener("submit", function(event){
+    event.preventDefault()
+  });
 }
 
 
@@ -279,6 +282,21 @@ function checkKeyPress(key){
       openTodo();
     }
   }
+
+  if(key.keyCode == "13" && textInputs.includes(document.activeElement)){
+    if(document.activeElement == document.getElementById('todo-text')){
+      addTodo();
+    }else if(document.activeElement == document.getElementById('sBAR')){
+      if(searchEngine == 1 || searchEngine == 2){
+        //set action to nothing
+        document.getElementById('searchContainer').submit();
+      }else{
+        console.log("happened");
+        otherSearch();
+      }
+    }
+  }
+
 }
 
 
