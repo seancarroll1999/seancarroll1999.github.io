@@ -168,9 +168,16 @@ function applySearch(){
 
 function otherSearch(){
   if(searchEngine == 3){
-    console.log('reached');
     var txt = 'https://solarmoviex.to/search?keyword=' + noSpaces(document.getElementById('sBAR').value);
-    location.replace(txt);
+    window.location.assign(txt);
+  }
+  if(searchEngine == 4){
+    var txt = 'https://rarbgmirror.org/torrents.php?search=' + noSpaces(document.getElementById('sBAR').value);
+    window.location.assign(txt);
+  }
+  if(searchEngine == 5){
+    var txt = 'https://piratebay.icu/search.php?q=' + noSpaces(document.getElementById('sBAR').value) + "&page=0&orderby=99";
+    window.location.assign(txt);
   }
 
 }
