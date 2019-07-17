@@ -6,6 +6,7 @@ window.onload = function() {
   makeLocalStorage();
   clockChange();
   dateChange();
+  getIP();
 
   //localStorage.setItem('todos', '');
   getTodos();
@@ -23,7 +24,10 @@ window.onload = function() {
 
   applySearch();
   changeLogo();
+
 }
+
+
 
 function makeLocalStorage(){
   if(localStorage.getItem('searchEngine') == null){
@@ -36,6 +40,37 @@ function makeLocalStorage(){
     localStorage.setItem('darkTheme', true);
   }
 }
+
+/* IP */
+
+var ip;
+var lat;
+var long;
+var country;
+
+function getIP(){
+  $.getJSON('https://ipapi.co/json', function(data) {
+    ip = data.ip;
+    lat = data.latitude;
+    long = data.longitude;
+    country = data.country;
+    changeMap();
+  });
+  //https://ipapi.co/api/
+}
+
+//changes the map position
+function changeMap(){
+  var map = document.getElementById('map');
+  if(country == 'GB' || country == 'undefined'){
+    map.setAttribute("src", "https://www.google.com/maps/embed/v1/view?key=AIzaSyBOi_4L-NgEAYOcf309Z93TQrZAG4NXQTY&center=54.296007,-4.069787&zoom=6&maptype=roadmap");
+  }else{
+    map.setAttribute("src", "https://www.google.com/maps/embed/v1/view?key=AIzaSyBOi_4L-NgEAYOcf309Z93TQrZAG4NXQTY&center=" + lat + "," + long + "&zoom=6&maptype=roadmap");
+  }
+  console.log("reached");
+}
+
+/* CLOCK AND DATE *?
 
 //runs the functions on every amount of milliseconds
 setInterval(clockChange, 1000);
@@ -165,12 +200,6 @@ function changeLogo(){
     document.getElementById('search-Logo').setAttribute('src', path);
   }
 }
-
-
-
-
-
-
 
 
 /*TOGGLE BETWEEN LIGHT AND DARK THEME
