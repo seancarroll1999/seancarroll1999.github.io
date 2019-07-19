@@ -53,6 +53,7 @@ function getIP(){
     lat = data.latitude;
     long = data.longitude;
     country = data.country;
+    console.log("lat = " + lat + "!! long = " + long);
     changeMap();
   });
   //https://ipapi.co/api/
@@ -67,7 +68,241 @@ function changeMap(){
     map.setAttribute("src", "https://www.google.com/maps/embed/v1/view?key=AIzaSyBOi_4L-NgEAYOcf309Z93TQrZAG4NXQTY&center=" + lat + "," + long + "&zoom=6&maptype=roadmap");
   }
   console.log("reached");
+  //getWeather();
+
+  console.log(get12(10));
 }
+
+/* WEATHER */
+
+function getWeather(){
+  console.log("accessed");
+  $.getJSON("http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&units=metric&APPID=091d27cdf9da20c25b9a9ce63d70d044", function(data) {
+    //console.log(JSON.stringify(data));
+    var dataArray = data.list;
+
+    dayArray = splitDays(dataArray);
+    console.log(dayArray);
+
+    //gets all boxs for displaying purpose
+    var displayBox = document.getElementsByClassName('weatherBox');
+
+    //new date object for dynamic text input
+    var currentDate = new Date();
+
+    for(var i = 0; i < displayBox.length; i++){
+      //gets the day array of information
+      var day = dayArray[i];
+      //gets the objects of the displayBox
+      var objects = displayBox[i].children;
+      console.log(objects);
+
+      //new date which increase by 1 everytime
+      textDate = new Date();
+      textDate.setDate(currentDate.getDate() + i);
+
+      //changes the day name and date
+      objects[0].children[0].children[0].textContent = textDate.toUTCString().substr(0,3);
+      objects[0].children[0].children[1].textContent = suffix(textDate.getDate());
+
+      //if its the first result then give the closest temp else give the average temp of that day
+      //same goes for the font awesome picture and the description
+      if(i == 0){
+        objects[0].children[1].children[0].children[0].textContent = day[0].main.temp;
+        objects[0].children[2].children[0].setAttribute("class", getIcon(day[0].weather[0].main));
+        objects[0].children[2].children[1].textContent = day[0].weather[0].description;
+      }else{
+        var mainValue = getWDescription(day);
+        objects[0].children[1].children[0].children[0].textContent = averageTemp(day);
+        objects[0].children[2].children[0].setAttribute("class", getIcon(mainValue));
+        objects[0].children[2].children[1].textContent = getWBigDescription(mainValue, day);
+      }
+
+      var code = "";
+      for(var x = 0; x < day.length; x++){
+
+        var time = new Date(day[x].dt_txt);
+        var hours = get12(time.getHours());
+          //\
+        if(x % 2 == 0){
+          var baseCode = "<div class=\"wDetail1\"><h5>" + hours + "</h5><h5><span>" + day[x].main.temp + "</span>&#8451;</h5><h5>" + day[x].weather[0].description + "</h5></div>";
+        }else{
+          var baseCode = "<div class=\"wDetail2\"><h5>" + hours + "</h5><h5><span>" + day[x].main.temp + "</span>&#8451;</h5><h5>" + day[x].weather[0].description + "</h5></div>";
+        }
+        code = code + baseCode;
+      }
+
+      objects[1].innerHTML = code;
+    }
+
+  });
+}
+
+//aplits list of days into specific days from current day to 5 days in advance
+function splitDays(dataArray){
+  var dates = [];
+  var testInput = dataArray[0].dt_txt;
+  var currentDate = new Date(testInput.substr(0,10));
+
+  //generates current date plus 4 more days in an array as the 5 day forecast
+  for(var a = 0; a < 6; a++){
+    var d = new Date();
+    d.setDate(currentDate.getDate() + a);
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setSeconds(0);
+    dates.push(d);
+  }
+
+  var dayArray = [[],[],[],[],[]];
+
+  //splits each list item into its specific day
+  //note, 12AM is included in the previous day and not in the current day no easy workaround found
+  for(var b = 0; b < dataArray.length; b++){
+    var inputDate = new Date(dataArray[b].dt_txt);
+    inputDate.setHours(inputDate.getHours() - 1);
+
+    if(inputDate.getTime() >= dates[0].getTime() && inputDate.getTime() < dates[1].getTime()){
+      dayArray[0].push(dataArray[b]);
+    }
+
+    if(inputDate >= dates[1] && inputDate < dates[2]){
+      dayArray[1].push(dataArray[b]);
+    }
+
+    if(inputDate >= dates[2] && inputDate < dates[3]){
+      dayArray[2].push(dataArray[b]);
+    }
+
+    if(inputDate >= dates[3] && inputDate < dates[4]){
+      dayArray[3].push(dataArray[b]);
+    }
+
+    if(inputDate >= dates[4] && inputDate < dates[5]){
+      dayArray[4].push(dataArray[b]);
+    }
+  }
+  return dayArray;
+}
+
+
+//gathers all temp information and averages a score
+function averageTemp(certainDay){
+  var averageTemp = 0;
+  for(var i = 0; i < certainDay.length; i++){
+    averageTemp += certainDay[i].main.temp;
+  }
+  averageTemp = ((averageTemp / certainDay.length).toFixed(2));
+  return averageTemp;
+}
+
+function getWDescription(certainDay){
+  //list of possibles: Snow, Thunderstorm, Rain, Drizzle, Clear, Clouds, Clear, Fog, Mist,
+  var possible = [0,0,0,0,0,0,0,0];
+
+  //my order of what i want to see if theres a duplicating number
+  var text = ["Snow", "Thunderstorm", "Rain", "Drizzle", "Clear", "Clouds", "Fog", "Mist"];
+  for(var i = 0; i < certainDay.length; i++){
+    var inputMain = certainDay[i].weather[0].main;
+
+    if(inputMain == "Snow"){
+      possible[0]++;
+    }else if(inputMain == "Thunderstorm"){
+      possible[1]++;
+    }
+    else if(inputMain == "Rain"){
+      possible[2]++;
+    }
+    else if(inputMain == "Drizzle"){
+      possible[3]++;
+    }
+    else if(inputMain == "Clear"){
+      possible[4]++;
+    }
+    else if(inputMain == "Clouds"){
+      possible[5]++;
+    }
+    else if(inputMain == "Fog"){
+      possible[6]++;
+    }
+    else if(inputMain == "Mist"){
+      possible[7]++;
+    }
+  }
+
+  //whats the max number in the array
+  var max = Math.max(...possible);
+  //gets the first instance of that max number in my important order above
+  var pos = possible.indexOf(max);
+  //returns string of the main weather event of that day
+  console.log(text[pos]);
+  return text[pos];
+}
+
+function getWBigDescription(mainValue, certainDay){
+  console.log("getbiggerDeascription: " + mainValue);
+  for(var i = 0; i < certainDay.length; i++){
+    if(mainValue == certainDay[i].weather[0].main){
+      return certainDay[i].weather[0].description;
+    }
+  }
+  return "No Data";
+}
+
+//returns the fontawesome icon associated with the mainDescription
+function getIcon(weatherDetail){
+  if(weatherDetail == "Snow"){
+    return "fas fa-cloud-meatball";
+  }else if(weatherDetail == "Thunderstorm"){
+    return "fas fa-bolt";
+  }else if(weatherDetail == "Rain"){
+    return "fas fa-cloud-showers-heavy";
+  }else if(weatherDetail == "Drizzle"){
+    return "fas fa-cloud-rain";
+  }else if(weatherDetail == "Clear"){
+    return "fas fa-sun";
+  }else if(weatherDetail == "Clouds"){
+    return "fas fa-cloud";
+  }else if(weatherDetail == "Fog"){
+    return "fas fa-smog";
+  }else if(weatherDetail == "Mist"){
+    return "fas fa-smog";
+  }
+  return "fas fa-cloud";
+}
+
+function get12(hours){
+  if(hours == 0){
+    return "12AM";
+  }else if(hours == 12){
+    return "12PM";
+  }else{
+    if(hours > 12){
+      hours = hours % 12;
+      return ("" + hours + "PM");
+    }else {
+      return ("" + hours + "AM");
+    }
+  }
+}
+
+var openNumber = -1;
+
+function openMoreDetails(number){
+    var arrayOfBoxes = document.getElementsByClassName('boxDetail');
+
+    if(openNumber == number){
+      arrayOfBoxes[(number -1)].style.display="none";
+    }else{
+      for(var i = 0; i < arrayOfBoxes.length; i++){
+        arrayOfBoxes[i].style.display = "none";
+      }
+      arrayOfBoxes[(number -1)].style.display = "block";
+      openNumber = number;
+    }
+}
+
+
 
 /* CLOCK AND DATE *?
 
@@ -247,12 +482,14 @@ function openSetting(){
   document.getElementById('settings').style.display = "block";
   document.getElementById('uni').style.display = "none";
   document.getElementById('todo').style.display = "none";
+  document.getElementById('weather').style.display = "none";
 }
 function openUni(){
   document.getElementById('box').style.display = "block";
   document.getElementById('settings').style.display = "none";
   document.getElementById('uni').style.display = "block";
   document.getElementById('todo').style.display = "none";
+  document.getElementById('weather').style.display = "none";
 }
 
 function openTodo(){
@@ -260,6 +497,20 @@ function openTodo(){
   document.getElementById('settings').style.display = "none";
   document.getElementById('uni').style.display = "none";
   document.getElementById('todo').style.display = "block";
+  document.getElementById('weather').style.display = "none";
+}
+
+var gotWeather = false;
+function openWeather(){
+  if(!gotWeather){
+    getWeather();
+    gotWeather = true;
+  }
+  document.getElementById('box').style.display = "block";
+  document.getElementById('settings').style.display = "none";
+  document.getElementById('uni').style.display = "none";
+  document.getElementById('todo').style.display = "none";
+  document.getElementById('weather').style.display = "block";
 }
 
 function closeBox(){
@@ -287,6 +538,9 @@ function checkKeyPress(key){
     }
     if(key.keyCode == "84"){ //T
       openTodo();
+    }
+    if(key.keyCode == "87"){ //T
+      openWeather();
     }
   }
 

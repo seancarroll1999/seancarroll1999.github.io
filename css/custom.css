@@ -277,3 +277,65 @@ input:focus, button:focus{
   font-size: 16px;
   opacity: 0.8;
 }
+
+/* WEATHER */
+#weather{
+  display:none;
+}
+
+.weatherBox{
+  background-color: #222;
+  margin-bottom: 4px;
+}
+
+.weatherMain{
+  display:grid;
+  grid-template-columns: 20% 20% 60%;
+}
+
+.day{
+  text-align: center;
+}
+
+.temp{
+  text-align: center;
+  padding-top: 0.8em;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+}
+
+.wDescription{
+  display: grid;
+  grid-template-columns: 20% 80%;
+}
+.wDescription i{
+  font-size: 280%;
+  padding-top: 0.2em;
+  padding-left: 0.3em;
+}
+.wDescription h4{
+  padding-top: 0.7em;
+  padding-left: 0.4em;
+}
+
+.boxDetail{
+  display:none;
+  background-color: #333;
+}
+
+.wDetail1{
+  display:grid;
+  grid-template-columns: 20% 20% 60%;
+  text-align: center;
+  background-color: #333;
+}
+.wDetail2{
+  display:grid;
+  grid-template-columns: 20% 20% 60%;
+  text-align: center;
+  background-color: #444;
+}
+
+.wDetail1 h5, .wDetail2 h5{
+  padding-top: 0.4em;
+}
