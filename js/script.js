@@ -77,7 +77,7 @@ function changeMap(){
 
 function getWeather(){
   console.log("accessed");
-  $.getJSON("http://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&units=metric&APPID=091d27cdf9da20c25b9a9ce63d70d044", function(data) {
+  $.getJSON("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&units=metric&APPID=091d27cdf9da20c25b9a9ce63d70d044", function(data) {
     //console.log(JSON.stringify(data));
     var dataArray = data.list;
 
