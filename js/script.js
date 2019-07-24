@@ -304,7 +304,7 @@ function openMoreDetails(number){
 
 
 
-/* CLOCK AND DATE *?
+/* CLOCK AND DATE */
 
 //runs the functions on every amount of milliseconds
 setInterval(clockChange, 1000);
