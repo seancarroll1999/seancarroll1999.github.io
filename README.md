@@ -32,3 +32,7 @@
     - breakdown of all 5 days every 3 hours available.
 
  *all GUIs can be accessed through left-hand sidebar or keycodes* 
+
+##Bug Report
+  *click button for search not working
+  * Performance issue on new map location
