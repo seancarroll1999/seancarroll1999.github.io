@@ -1,9 +1,8 @@
-var themeOP = localStorage.getItem('darkTheme');
 var textInputs = [];
-var searchEngine = localStorage.getItem('searchEngine'); //change to localstorage
+
+makeLocalStorage();
 
 window.onload = function() {
-  makeLocalStorage();
   clockChange();
   dateChange();
   getIP();
@@ -14,7 +13,7 @@ window.onload = function() {
 
 
   if(themeOP == 'true'){
-     $('#changeTheme').bootstrapToggle('on');
+    $('#changeTheme').bootstrapToggle('on');
   }else{
     $('#changeTheme').bootstrapToggle('off');
   }
@@ -26,7 +25,8 @@ window.onload = function() {
   changeLogo();
 }
 
-
+var themeOP = localStorage.getItem('darkTheme');
+var searchEngine = localStorage.getItem('searchEngine');
 
 function makeLocalStorage(){
   if(localStorage.getItem('searchEngine') == null){
@@ -36,6 +36,7 @@ function makeLocalStorage(){
     localStorage.setItem('todos', '');
   }
   if(localStorage.getItem('darkTheme') == null){
+    console.log("reached statement");
     localStorage.setItem('darkTheme', true);
   }
 }
