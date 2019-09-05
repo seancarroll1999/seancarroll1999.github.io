@@ -1,5 +1,8 @@
 var textInputs = [];
 
+var keywords = ["utube", "youtube", "amazon"];
+var keywordPlaces = ["https://www.youtube.co.uk", "https://www.youtube.co.uk", "https://www.amazon.co.uk"];
+
 makeLocalStorage();
 
 window.onload = function() {
@@ -21,7 +24,8 @@ window.onload = function() {
   textInputs.push(document.getElementById('todo-text'));
   textInputs.push(document.getElementById('sBAR'));
 
-  applySearch();
+  textInputs[1].focus();
+  textInputs[1].value = "";
   changeLogo();
 }
 
@@ -36,9 +40,15 @@ function makeLocalStorage(){
     localStorage.setItem('todos', '');
   }
   if(localStorage.getItem('darkTheme') == null){
-    console.log("reached statement");
     localStorage.setItem('darkTheme', true);
   }
+  if(localStorage.getItem('GBLat') == null){
+    localStorage.setItem('GBLat', "51.5074");
+  }
+  if(localStorage.getItem('GBLong') == null){
+    localStorage.setItem('GBLong', "0.1278");
+  }
+
 }
 
 /* IP */
@@ -55,6 +65,13 @@ function getIP(){
     long = data.longitude;
     country = data.country;
     console.log("lat = " + lat + "!! long = " + long);
+
+    //sets the GB lat and long for weather when vpn active
+    if(country == "GB"){
+      localStorage.setItem('GBLat', lat);
+      localStorage.setItem('GBLong', long);
+    }
+
     changeMap();
   });
   //https://ipapi.co/api/
@@ -78,7 +95,20 @@ function changeMap(){
 
 function getWeather(){
   console.log("accessed");
-  $.getJSON("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + long + "&units=metric&APPID=091d27cdf9da20c25b9a9ce63d70d044", function(data) {
+
+  var posLat;
+  var posLong;
+
+  //weather is only GB now to get accurate information even with vpn
+  if(country !== "GB"){
+    posLat = localStorage.getItem('GBLat');
+    posLong = localStorage.getItem('GBLong');
+  }else{
+    posLat = lat;
+    posLong = long;
+  }
+
+  $.getJSON("https://api.openweathermap.org/data/2.5/forecast?lat=" + posLat + "&lon=" + posLong + "&units=metric&APPID=091d27cdf9da20c25b9a9ce63d70d044", function(data) {
     //console.log(JSON.stringify(data));
     var dataArray = data.list;
 
@@ -379,30 +409,39 @@ function changeSearch(){
   }
 
   localStorage.setItem('searchEngine', searchEngine);
-  applySearch();
+
   changeLogo();
 }
 
-function applySearch(){
-  var engine = document.getElementById('searchContainer');
-  var btn = document.getElementById('sBTN');
-  if(searchEngine == 1){
-      engine.action = "https://www.google.co.uk/search";
-      btn.setAttribute('type', 'submit');
-  }else if(searchEngine == 2){
-    engine.action = "https://duckduckgo.com/";
-    btn.setAttribute('type', 'submit');
-  }else{
-    btn.setAttribute('type', 'button');
-  }
 
-  engine.addEventListener("submit", function(event){
-    event.preventDefault()
-  });
-}
 
 
 function otherSearch(){
+  if(searchEngine == 1){
+    //checks to see if the search is a keyword and acts upon that
+    var txt;
+    var inputText = document.getElementById('sBAR').value;
+
+    if(keywords.includes(inputText)){
+      txt = keywordPlaces[keywords.indexOf(inputText)];
+    }else{
+      txt = 'https://www.google.co.uk/search?q=' + noSpaces(document.getElementById('sBAR').value);
+    }
+
+    window.location.assign(txt);
+  }
+  if(searchEngine == 2){
+    var txt;
+    var inputText = document.getElementById('sBAR').value;
+
+    if(keywords.includes(inputText)){
+      txt = keywordPlaces[keywords.indexOf(inputText)];
+    }else{
+      txt = 'https://duckduckgo.com/?q=' + noSpaces(document.getElementById('sBAR').value);
+    }
+
+    window.location.assign(txt);
+  }
   if(searchEngine == 3){
     var txt = 'https://solarmoviex.to/search?keyword=' + noSpaces(document.getElementById('sBAR').value);
     window.location.assign(txt);
@@ -528,7 +567,15 @@ window.addEventListener("keydown", checkKeyPress, false); //ENABLE FOR BOX TO AP
 
 function checkKeyPress(key){
   if(key.keyCode == "27"){ //ESC
-    closeBox();
+
+    //ESC on TextBox first
+    if(textInputs.includes(document.activeElement)){
+      console.log("reached");
+      document.getElementById("hiddenEl").focus();
+    }else{
+      closeBox();
+    }
+
   }
   if(textInputs.includes(document.activeElement) !== true){
     if(key.keyCode == "83"){ // S
@@ -549,13 +596,7 @@ function checkKeyPress(key){
     if(document.activeElement == document.getElementById('todo-text')){
       addTodo();
     }else if(document.activeElement == document.getElementById('sBAR')){
-      if(searchEngine == 1 || searchEngine == 2){
-        //set action to nothing
-        document.getElementById('searchContainer').submit();
-      }else{
-        console.log("happened");
-        otherSearch();
-      }
+      otherSearch();
     }
   }
 

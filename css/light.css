@@ -47,6 +47,10 @@ body{
   background-color: #666;
 }
 
+#sBTN:hover{
+  background-color: #666;
+}
+
 #sBAR:focus + #sBTN{
   background-color: #666;
 }

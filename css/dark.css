@@ -38,6 +38,10 @@ body{
   background-color: #111;
 }
 
+#sBTN:hover{
+  background-color: #111;
+}
+
 #sBAR{
   color: #ddd;
   border-bottom: 2px solid white;

@@ -43,10 +43,11 @@
   </div>
 
 
-  <form id="searchContainer" action="https://www.google.co.uk/search" method="get" autocomplete="off">
-    <input id="sBAR" type="text" name="q">
-    <input id="sBTN" type="submit" value="" onclick="otherSearch()">
-  </form>
+  <div id="searchContainer" action="" method="get" autocomplete="off">
+    <input id="sBAR" type="text" name="t">
+    <input id="sBTN" type="button" value="" onclick="otherSearch()">
+    <a id="hiddenEl" href=""></a>
+  </div>
 
   <button id="switchSearch" onclick="changeSearch()"><img id="search-Logo" src="img/google-Light.svg"></button>
 
