@@ -61,7 +61,7 @@ body{
   border-bottom-left-radius: 5px;
 }
 
-input:focus, button:focus{
+input:focus, button:focus, a:focus{
   outline: none;
 }
 
