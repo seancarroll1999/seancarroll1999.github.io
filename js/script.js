@@ -1,7 +1,7 @@
 var textInputs = [];
 
-var keywords = ["utube", "youtube", "amazon"];
-var keywordPlaces = ["https://www.youtube.co.uk", "https://www.youtube.co.uk", "https://www.amazon.co.uk"];
+var keywords = ["utube", "youtube", "u tube", "amazon", "github"];
+var keywordPlaces = ["https://www.youtube.co.uk", "https://www.youtube.co.uk", "https://www.youtube.co.uk", "https://www.amazon.co.uk", "https://www.github.com"];
 
 makeLocalStorage();
 
@@ -169,7 +169,7 @@ function getWeather(){
   });
 }
 
-//aplits list of days into specific days from current day to 5 days in advance
+//splits list of days into specific days from current day to 5 days in advance
 function splitDays(dataArray){
   var dates = [];
   var testInput = dataArray[0].dt_txt;
@@ -324,6 +324,7 @@ function openMoreDetails(number){
 
     if(openNumber == number){
       arrayOfBoxes[(number -1)].style.display="none";
+      openNumber = -1;
     }else{
       for(var i = 0; i < arrayOfBoxes.length; i++){
         arrayOfBoxes[i].style.display = "none";
@@ -331,6 +332,7 @@ function openMoreDetails(number){
       arrayOfBoxes[(number -1)].style.display = "block";
       openNumber = number;
     }
+
 }
 
 
