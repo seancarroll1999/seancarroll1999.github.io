@@ -85,7 +85,6 @@ function changeMap(){
   }else{
     map.setAttribute("src", "https://www.google.com/maps/embed/v1/view?key=AIzaSyBOi_4L-NgEAYOcf309Z93TQrZAG4NXQTY&center=" + lat + "," + long + "&zoom=6&maptype=roadmap");
   }
-  console.log("reached");
   //getWeather();
 
   console.log(get12(10));
@@ -94,8 +93,7 @@ function changeMap(){
 /* WEATHER */
 
 function getWeather(){
-  console.log("accessed");
-
+  
   var posLat;
   var posLong;
 
