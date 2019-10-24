@@ -93,7 +93,7 @@ function changeMap(){
 /* WEATHER */
 
 function getWeather(){
-  
+
   var posLat;
   var posLong;
 
@@ -443,7 +443,7 @@ function otherSearch(){
     window.location.assign(txt);
   }
   if(searchEngine == 3){
-    var txt = 'https://solarmoviex.to/search?keyword=' + noSpaces(document.getElementById('sBAR').value);
+    var txt = 'https://www7.putlockertv.to/search?keyword=' + noSpaces(document.getElementById('sBAR').value);
     window.location.assign(txt);
   }
   if(searchEngine == 4){
