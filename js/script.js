@@ -590,7 +590,25 @@ function checkKeyPress(key){
     if(key.keyCode == "87"){ //T
       openWeather();
     }
+
   }
+
+  if(document.getElementById('todo-text') != document.activeElement){
+    if(key.keyCode == "38"){ //arrowUp
+      changeSearch();
+    }
+    if(key.keyCode == "40"){ //arrowDown
+      if(searchEngine == 1){
+           searchEngine = 5;
+         }else{
+           searchEngine--;
+         }
+
+         localStorage.setItem('searchEngine', searchEngine);
+         changeLogo();
+    }
+  }
+
 
   if(key.keyCode == "13" && textInputs.includes(document.activeElement)){
     if(document.activeElement == document.getElementById('todo-text')){
