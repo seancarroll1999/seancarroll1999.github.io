@@ -570,7 +570,12 @@ var enteredString = "";
 
 function checkKeyPress(key){
 
-  enteredString = enteredString + String.fromCharCode(key.keyCode);
+  //for special characters
+  if(key.keyCode == "66"){
+    enteredString = "B";
+  }else{
+    enteredString = enteredString + String.fromCharCode(key.keyCode);
+  }
 
   if(key.keyCode == "27"){ //ESC
 
@@ -582,6 +587,7 @@ function checkKeyPress(key){
       closeBox();
     }
   }
+
 
   //turns on special background
   if(enteredString.length == 4){
