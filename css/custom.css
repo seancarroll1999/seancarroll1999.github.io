@@ -339,3 +339,12 @@ input:focus, button:focus, a:focus{
 .wDetail1 h5, .wDetail2 h5{
   padding-top: 0.4em;
 }
+
+#theBoiz{
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 42.6%;
+  transform: translate(-50%, -50%);
+  filter: brightness(0.85);
+}

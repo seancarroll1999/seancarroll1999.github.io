@@ -565,7 +565,13 @@ function closeBox(){
 */
 window.addEventListener("keydown", checkKeyPress, false); //ENABLE FOR BOX TO APPEAR
 
+var boiz = "BOIZ";
+var enteredString = "";
+
 function checkKeyPress(key){
+
+  enteredString = enteredString + String.fromCharCode(key.keyCode);
+
   if(key.keyCode == "27"){ //ESC
 
     //ESC on TextBox first
@@ -575,8 +581,18 @@ function checkKeyPress(key){
     }else{
       closeBox();
     }
-
   }
+
+  //turns on special background
+  if(enteredString.length == 4){
+    if(boiz === enteredString){
+      toggleBoiz();
+      enteredString = "";
+    }else{
+      enteredString = "";
+    }
+  }
+
   if(textInputs.includes(document.activeElement) !== true){
     if(key.keyCode == "83"){ // S
       openSetting();
@@ -618,6 +634,19 @@ function checkKeyPress(key){
     }
   }
 
+}
+
+/* TOGGLE theBoiz */
+
+var boizActive = false;
+function toggleBoiz(){
+  if(boizActive){
+    document.getElementById("theBoiz").style.display = "none";
+    boizActive = false;
+  }else{
+    document.getElementById("theBoiz").style.display = "block";
+    boizActive = true;
+  }
 }
 
 
