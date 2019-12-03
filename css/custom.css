@@ -340,7 +340,7 @@ input:focus, button:focus, a:focus{
   padding-top: 0.4em;
 }
 
-#theBoiz{
+ #theBoiz{
   display: none;
   position: absolute;
   left: 50%;
@@ -348,3 +348,13 @@ input:focus, button:focus, a:focus{
   transform: translate(-50%, -50%);
   filter: brightness(0.85);
 }
+/*
+#theBoiz{
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  transform: translate(-50%, -50%);
+  filter: brightness(0.85);
+  width: 1920px;
+}*/
