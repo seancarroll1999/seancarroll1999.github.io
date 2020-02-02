@@ -413,9 +413,6 @@ function changeSearch(){
   changeLogo();
 }
 
-
-
-
 function otherSearch(){
   if(searchEngine == 1){
     //checks to see if the search is a keyword and acts upon that
