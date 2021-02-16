@@ -1,7 +1,3 @@
-# Start Page
-
-#### url: https://seancarroll1999.github.io/
-
 ## Features:
 
 * Time and Date
